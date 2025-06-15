@@ -1,37 +1,33 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./routes/ProtectedRoutes";
+import Layout from "./layout/layout";
+import Dashboard from "./pages/dashboard/DashboardPage";
+import ProductPage from "./pages/dashboard/ProductPage";
+import OrderPage from "./pages/dashboard/OrdersPage";
 import LoginPage from "./pages/auth/LoginPage";
-import DashboardPage from "./pages/dashboard/DashboardPage";
-import { useAuthStore } from "./store/useAuthStore";
-import OrdersPage from "./pages/dashboard/OrdersPage";
-import ProductsPage from "./pages/dashboard/ProductPage";
-import { Navigate } from "react-router-dom";
-import NotFound from "./components/NotFound";
 
-function App() {
-  const { isLoggedIn } = useAuthStore();
+export default function App() {
   return (
-    <div className="">
-      <Routes>
-        <Route
-          path="/"
-          element={isLoggedIn ? <DashboardPage /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/products"
-          element={isLoggedIn ? <ProductsPage /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/orders"
-          element={isLoggedIn ? <OrdersPage /> : <Navigate to="/login" />}
-        />
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
 
-        <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="products" element={<ProductPage />} />
+        <Route path="orders" element={<OrderPage />} />
+      </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+      <Route
+        path="*"
+        element={<div className="p-10 text-center">404 Not Found</div>}
+      />
+    </Routes>
   );
 }
-
-export default App;
