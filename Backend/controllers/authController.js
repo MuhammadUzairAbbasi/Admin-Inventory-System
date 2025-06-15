@@ -50,3 +50,19 @@ export const registerAdmin = async (req, res) => {
     res.status(500).json({ message: "Registration failed" });
   }
 };
+
+export const logout = async (req, res) => {
+  try {
+    // Clear the JWT cookie
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV !== "development",
+    });
+
+    res.status(200).json({ message: "Logged out successfully" });
+  } catch (error) {
+    console.error("Error in Logout Controller:", error.message);
+    res.status(500).json({ message: "Logout failed" });
+  }
+};
