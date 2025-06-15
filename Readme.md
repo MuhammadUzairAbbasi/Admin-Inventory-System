@@ -9,36 +9,36 @@ A full-stack **MERN** (MongoDB, Express, React, Node.js) Admin Dashboard develop
 ### 🔧 Backend Setup
 
 ```bash
-cd backend
+cd Backend
 npm install
 ```
 
-Create a `.env` file in the `/backend` directory with the following:
+Create a `.env` file in the `/Backend` directory with the following:
 
 ```env
-PORT=5000
+PORT=port
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
 CLOUDINARY_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_SECRET=your_secret
+CLOUDINARY_API_SECRET=your_secret
 ```
 
 Run the server:
 
 ```bash
-npm start     # Production
+npm run start     # Production
 npm run dev   # Development with nodemon
 ```
 
 ### 🌐 Frontend Setup
 
 ```bash
-cd frontend
+cd Frontend
 npm install
 ```
 
-Create a `.env` file in the `/frontend` directory:
+Create a `.env` file in the `/Frontend` directory:
 
 ```env
 VITE_API_BASE_URL=https://your-backend.up.railway.app/api
